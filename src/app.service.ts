@@ -10,8 +10,12 @@ export class AppService {
     return 'Hello World!'
   }
 
-  async healthCheck(): Promise<string> {
-    return "Service is healthy"
+  async healthCheck(): Promise<any> {
+    try {
+      return await this.databaseService.healthcheck()?'Service is healthy':'Error'
+    } catch(err) {
+      return 'Error'
+    }
   }
 
 }

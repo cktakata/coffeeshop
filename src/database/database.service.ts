@@ -12,7 +12,11 @@ export class DatabaseService {
   ) { }
 
   async healthcheck(): Promise<Product[]> {
+    try {
       return this.productModel.find().exec();
+    } catch(err) {
+      throw new Error('Cannot connect to database')
+    }
   }
 
 }

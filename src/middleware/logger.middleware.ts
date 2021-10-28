@@ -14,7 +14,7 @@ export class LoggerMiddleware implements NestMiddleware {
     const startTime = Date.now()
     res.on('close', () => {
       const message = new Message();
-      message.info([`[Nest] ${process.pid}`, format(new Date(), "dd/MM/yyyy H:mm:ss", { locale: enIN }), '[LogInfo]', `{${req.url}, ${req.method}} time`, `+${Date.now()-startTime}ms`])
+      message.info([`[Nest] ${process.pid}`, format(new Date(), "dd/MM/yyyy HH:mm:ss", { locale: enIN }), '[LogInfo]', `{${req.url}, ${req.method}} time`, `+${Date.now()-startTime}ms`])
       if(Object.keys(req.body).length>0) {
         debug==='1'?console.log(req.body):''
       }

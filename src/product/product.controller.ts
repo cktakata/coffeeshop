@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Header, HttpCode, Param, Post, Req, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Header, HttpCode, Param, Post, Put, Query, Req, Res } from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Product } from "src/interface/product.interface";
 import { ProductService } from "./product.service";
@@ -71,6 +71,23 @@ export class ProductController {
     } catch(e) {
       console.log(e.stack)
       throw new Error('Cannot get product')
+    }
+  }
+
+  @Put('/update/:id')
+  @ApiOperation({ summary: 'Atualiza um produto' })
+  @ApiResponse( { status: HTTP_CODE.OK, description: 'Retorna produto atualizado' })
+  @ApiParam({ name: 'id' })
+  @ApiBody({ type: ProductDTO })
+  @HttpCode(HTTP_CODE.OK)
+  @Header('Content-type', 'application/json')
+  async updateProduct(@Res() res: Response, @Req() req: Request, @Param() params, @Body() body: Product): Promise<Response> {
+    try {
+      const savedProduct = await this.productService.update(params.id, body)
+      return res.status(savedProduct.status).json(savedProduct.response)
+    } catch(e) {
+      console.log(e.stack)
+      throw new Error('Cannot save product')
     }
   }
 }

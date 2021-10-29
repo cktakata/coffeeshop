@@ -29,8 +29,13 @@ export class ProductService {
     }
 
     public async delete(id: string): Promise<{status: number, response: boolean}> {
-        await this.productModel.deleteOne({ _id: id }).exec();
+        await this.productModel.deleteOne( { _id: id } ).exec();
         return { status: HTTP_CODE.OK, response: true }
+    }
+
+    public async update(id:string, productDto: Product): Promise<{status: number, response: Product}> {
+        const updateProduct = await this.productModel.updateOne( { _id: new mongoose.Types.ObjectId(id) }, productDto );
+        return { status: HTTP_CODE.OK, response: updateProduct as any }
     }
 
 }

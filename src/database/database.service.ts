@@ -1,7 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { Model } from "mongoose";
 import { Product } from "../interface/product.interface";
-import { Message } from '../util/message';
 
 @Injectable()
 export class DatabaseService {

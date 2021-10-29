@@ -17,10 +17,4 @@ export class AppController {
     }
   }
   
-  @ApiExcludeEndpoint()
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-  
 }

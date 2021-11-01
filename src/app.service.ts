@@ -10,8 +10,15 @@ export class AppService {
     try {
       return await this.databaseService.healthcheck()?'Service is healthy':'Error'
     } catch(err) {
-      return 'Error'
+      return new Error('Error')
     }
   }
 
+  async disconnect(): Promise<any> {
+    try {
+      await this.databaseService.disconnect()
+    } catch(err) {
+      return new Error('Error')
+    }
+  }
 }

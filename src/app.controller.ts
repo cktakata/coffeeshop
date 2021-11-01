@@ -17,4 +17,15 @@ export class AppController {
     }
   }
   
+  @ApiExcludeEndpoint()
+  @Get('/disconnect')
+  @HttpCode(200)
+  async disconnect() {
+    try {
+      await this.appService.disconnect();
+    } catch(e) {
+      throw(e)
+    }
+  }
+
 }

@@ -18,4 +18,11 @@ export class DatabaseService {
     }
   }
 
+  async disconnect(): Promise<any> {
+    try {
+      return this.productModel.db.close()
+    } catch(err) {
+      throw new Error('Cannot connect to database')
+    }
+  }
 }

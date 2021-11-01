@@ -13,29 +13,49 @@ export class ProductService {
     ) {}
 
     public async save(productDto: Product): Promise<{status: number, response: Product}> {
-        const createProduct = new this.productModel(productDto);
-        const product = await createProduct.save();
-        return { status: HTTP_CODE.OK, response: product }
+        try {
+            const createProduct = new this.productModel(productDto);
+            const product = await createProduct.save();
+            return { status: HTTP_CODE.OK, response: product }
+        } catch(e) {
+            throw new Error(e.stack)
+        }
     }
 
     public async findAll(): Promise<{status: number, response: Product[]}> {
-        const products = await this.productModel.find().exec();
-        return { status: HTTP_CODE.OK, response: products }
+        try {
+            const products = await this.productModel.find().exec();
+            return { status: HTTP_CODE.OK, response: products }
+        } catch(e) {
+            throw new Error(e.stack)
+        }
     }
 
     public async get(id: string): Promise<{status: number, response: Product}> {
-        const product = await this.productModel.findById(new mongoose.Types.ObjectId(id)).exec();
-        return { status: HTTP_CODE.OK, response: product }
+        try {
+            const product = await this.productModel.findById(new mongoose.Types.ObjectId(id)).exec();
+            return { status: HTTP_CODE.OK, response: product }
+        } catch(e) {
+            throw new Error(e.stack)
+        }
     }
 
     public async delete(id: string): Promise<{status: number, response: boolean}> {
-        await this.productModel.deleteOne( { _id: id } ).exec();
-        return { status: HTTP_CODE.OK, response: true }
+        try {
+            await this.productModel.deleteOne( { _id: id } ).exec();
+            return { status: HTTP_CODE.OK, response: true }
+        } catch(e) {
+            throw new Error(e.stack)
+        }
     }
 
     public async update(id:string, productDto: Product): Promise<{status: number, response: Product}> {
-        const updateProduct = await this.productModel.updateOne( { _id: new mongoose.Types.ObjectId(id) }, productDto );
-        return { status: HTTP_CODE.OK, response: updateProduct as any }
+        try {
+            const updateProduct = await this.productModel.updateOne( { _id: new mongoose.Types.ObjectId(id) }, productDto );
+            return { status: HTTP_CODE.OK, response: updateProduct as any }
+        } catch(e) {
+            throw new Error(e.stack)
+        }
     }
 
 }

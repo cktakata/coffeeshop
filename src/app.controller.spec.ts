@@ -42,4 +42,8 @@ describe('AppController', () => {
     });
   });
 
+  afterEach(async() => {
+    await mongoServer.stop()
+  })
+
 });

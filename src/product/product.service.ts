@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { Model } from "mongoose";
-import { HTTP_CODE } from "src/errorcodes/error";
+import { HTTP_CODE } from "../errorcodes/error";
 import { Product } from "../interface/product.interface";
 import * as mongoose from "mongoose";
 

@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Header, HttpCode, Param, Post, Put, Query, Req, Res } from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Product } from "src/interface/product.interface";
+import { Product } from "../interface/product.interface";
 import { ProductService } from "./product.service";
 import { Response, Request } from 'express';
-import { HTTP_CODE } from "src/errorcodes/error";
-import { ProductDTO } from "src/dto/product.dto";
+import { HTTP_CODE } from "../errorcodes/error";
+import { ProductDTO } from "../dto/product.dto";
 
 @ApiTags('Public')
 @Controller()

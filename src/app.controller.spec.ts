@@ -12,6 +12,7 @@ describe('AppController', () => {
   let mongoServer;
 
   beforeEach(async () => {
+    // given
     mongoServer = await MongoMemoryServer.create();
     const URI = await mongoServer.getUri();
     const app: TestingModule = await Test.createTestingModule({
@@ -27,19 +28,18 @@ describe('AppController', () => {
       ...productProviders],
     })
     .compile();
-
     appController = app.get<AppController>(AppController);
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', async () => {
-      expect(await appController.healthCheck()).toBe("Service is healthy");
+    it('should return "Service is healthy"', async () => {
+      // when
+      const data = await appController.healthCheck();
+      // then
+      expect(data).toBe("Service is healthy");
       await appController.disconnect();
       await mongoose.disconnect();
     });
   });
 
-  afterAll(async() => {
-    await mongoose.disconnect();
-  });
 });
